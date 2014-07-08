@@ -1,0 +1,130 @@
+.chess-board {
+	border-collapse:collapse;
+  background: url('gold.jpeg');
+  background-size: 100%;
+  border: 3px solid lightgray;
+  float:left;
+  width:422px;
+  table {
+  display: inline-block;
+  float: left;
+    width: 422px;
+    height: 422px;
+  }
+}
+
+
+
+
+
+.notation {
+  margin-right: 15%;
+  border-collapse: collapse;
+  border: 2px solid white;
+}
+
+td {
+	width: 50px;
+	height: 50px;
+  text-align: center;
+}
+
+a {
+  color: white;
+  text-decoration:none;
+}
+
+.not-col {
+  width: 100px;
+  border-bottom: 1px solid white;
+  background: rgba(232,183,69,0.95);
+  background: -moz-linear-gradient(left, rgba(232,183,69,0.95) 0%, rgba(209,133,19,0.73) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(232,183,69,0.95)), color-stop(100%, rgba(209,133,19,0.73)));
+  background: -webkit-linear-gradient(left, rgba(232,183,69,0.95) 0%, rgba(209,133,19,0.73) 100%);
+  background: -o-linear-gradient(left, rgba(232,183,69,0.95) 0%, rgba(209,133,19,0.73) 100%);
+  background: -ms-linear-gradient(left, rgba(232,183,69,0.95) 0%, rgba(209,133,19,0.73) 100%);
+  background: linear-gradient(to right, rgba(232,183,69,0.95) 0%, rgba(209,133,19,0.73) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8b745', endColorstr='#d18513', GradientType=1 );
+}
+
+.col_1 {
+  border-right: 1px solid white;
+}
+
+
+.columns_for_chess_board {
+  display: inline-block;
+  width: 300px;
+}
+
+
+.show_game_border {
+  div {
+    margin-top: 50px;
+    margin-right: 42px;
+    margin-left: 42px;
+  }
+}
+
+.board_div {
+  float:left;
+  width: 422px;
+
+}
+
+.fen_list {
+  border: 2px solid gray;
+  padding:30px;
+  width: 150px;
+  float: right;
+  display: inline-block;
+  margin-right: 0px;
+  height: 450px;
+  overflow-y: scroll;
+  table {
+    margin: auto ;
+    text-align: center;
+  }
+}
+
+.buttons_for_chess_board {
+  border: 2px solid gray;
+  width: 200px;
+  height: 422px;
+  margin-left: 0px;
+}
+
+.fav_and_jump_div {
+   margin: auto;
+  input {
+    width: 75px;
+  }
+
+}
+
+.all_games {
+  padding-left:15px;
+  li {
+    list-style: none;
+  }
+  h2 {
+    border-bottom: 2px gray solid;
+  }
+  a:hover {
+    color:yellow;
+  }
+}
+
+.search_result {
+  padding-left:15px;
+  li {
+    list-style: none;
+  }
+  h2 {
+    border-bottom: 2px gray solid;
+  }
+  a:hover {
+    color:yellow;
+  }
+}
+

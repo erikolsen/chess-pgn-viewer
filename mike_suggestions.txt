@@ -1,0 +1,22 @@
+Build Database
+-How much of this is mvp
+
+
+What is passed to the front end
+How do you select games
+Do we need pagination?
+Can we show the ten most common moves for any position?
+We need chess piece graphics
+-http://en.wikipedia.org/wiki/Chess_symbols_in_Unicode
+
+polymorphism
+favourites can have games or moves
+belongs to games
+belongs to moves
+belongs to players
+
+shoulda matchers library
+testing all relationships
+
+full model coverage testing
+front end testing 10-20 tests

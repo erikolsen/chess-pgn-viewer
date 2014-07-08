@@ -1,0 +1,52 @@
+nav {
+  font-family: 'Roboto', sans-serif;
+  position:fixed;
+  background-color: black;
+  top: 0;
+  left:0;
+  width: 100%;
+  height: 50px;
+
+  border-bottom: 1px solid gray;
+
+  ul {
+      width: 100%;
+     height: 60px;
+     margin: 0px;
+
+    li {
+      position: relative;
+      top: 35%;
+
+    }
+  }
+}
+
+.left-nav {
+
+      padding-right: 75px;
+      float: left;
+      list-style: none;
+}
+
+.right-nav {
+      vertical-align: baseline;
+      padding-right: 75px;
+      float: right;
+      list-style: none;
+}
+
+#search {
+  float:right;
+  padding-right: 20px;
+}
+
+#home_icon {
+  top: 10%;
+  padding-right: 90px;
+  font-size: 180%;
+
+  a {
+  color: #cc9900;
+  }
+}

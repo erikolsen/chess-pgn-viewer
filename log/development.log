@@ -1,0 +1,1957 @@
+  [1m[36m (1.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.1ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateGames (20140604163213)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (2.9ms)[0m  [1mCREATE TABLE "games" ("id" serial primary key, "date_played" character varying(255), "event" character varying(255), "site" character varying(255), "eco_code" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140604163213"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateParticipations (20140604202525)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.5ms)[0m  [1mCREATE TABLE "participations" ("id" serial primary key, "game_id" integer, "player_id" integer, "color" character varying(255), "result" character varying(255), "rating" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140604202525"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateMoves (20140605203938)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "moves" ("id" serial primary key, "game_id" integer, "iteration" integer, "board_position" character varying(255), "notation" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140605203938"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateUsers (20140608010124)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "uid" character varying(255), "provider" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140608010124"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePlayers (20140608215128)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (1.7ms)[0m  [1mCREATE TABLE "players" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140608215128"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateFavorites (20140608215505)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (1.4ms)[0m  [1mCREATE TABLE "favorites" ("id" serial primary key, "user_id" integer, "favoritible_id" integer, "favoritible_type" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140608215505"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (112.2ms)[0m  [1mDROP DATABASE IF EXISTS "chaturanga_chess_test"[0m
+  [1m[35m (249.3ms)[0m  CREATE DATABASE "chaturanga_chess_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.4ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (3.9ms)[0m  CREATE TABLE "favorites" ("id" serial primary key, "user_id" integer, "favoritible_id" integer, "favoritible_type" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (3.1ms)[0m  [1mCREATE TABLE "games" ("id" serial primary key, "date_played" character varying(255), "event" character varying(255), "site" character varying(255), "eco_code" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (2.8ms)[0m  CREATE TABLE "moves" ("id" serial primary key, "game_id" integer, "iteration" integer, "board_position" character varying(255), "notation" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.5ms)[0m  [1mCREATE TABLE "participations" ("id" serial primary key, "game_id" integer, "player_id" integer, "color" character varying(255), "result" character varying(255), "rating" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.5ms)[0m  CREATE TABLE "players" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "uid" character varying(255), "provider" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140608215505')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140604163213')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140604202525')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140605203938')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140608010124')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140608215128')
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (8.7ms)[0m  [1mINSERT INTO "games" ("created_at", "date_played", "eco_code", "event", "site", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:36.397713"], ["date_played", "1886.01.11"], ["eco_code", "C47"], ["event", "World Championship 1st"], ["site", "USA"], ["updated_at", "2014-06-09 02:54:36.397713"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "rnbqkbnrpppppppp00000000000000000000P00000000000PPPP0PPPRNBQKBNR"], ["created_at", "2014-06-09 02:54:36.421779"], ["game_id", 1], ["iteration", 1], ["notation", "e4"], ["updated_at", "2014-06-09 02:54:36.421779"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "rnbqkbnrpppp0ppp000000000000p0000000P00000000000PPPP0PPPRNBQKBNR"], ["created_at", "2014-06-09 02:54:36.424879"], ["game_id", 1], ["iteration", 2], ["notation", "e5"], ["updated_at", "2014-06-09 02:54:36.424879"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "rnbqkbnrpppp0ppp000000000000p0000000P00000000N00PPPP0PPPRNBQKB0R"], ["created_at", "2014-06-09 02:54:36.426331"], ["game_id", 1], ["iteration", 3], ["notation", "Nf3"], ["updated_at", "2014-06-09 02:54:36.426331"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0bqkbnrpppp0ppp00n000000000p0000000P00000000N00PPPP0PPPRNBQKB0R"], ["created_at", "2014-06-09 02:54:36.427694"], ["game_id", 1], ["iteration", 4], ["notation", "Nc6"], ["updated_at", "2014-06-09 02:54:36.427694"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0bqkbnrpppp0ppp00n000000000p000000PP00000000N00PPP00PPPRNBQKB0R"], ["created_at", "2014-06-09 02:54:36.429060"], ["game_id", 1], ["iteration", 5], ["notation", "d4"], ["updated_at", "2014-06-09 02:54:36.429060"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0bqkbnrpppp0ppp00n0000000000000000pP00000000N00PPP00PPPRNBQKB0R"], ["created_at", "2014-06-09 02:54:36.430412"], ["game_id", 1], ["iteration", 6], ["notation", "exd4"], ["updated_at", "2014-06-09 02:54:36.430412"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0bqkbnrpppp0ppp00n0000000000000000NP00000000000PPP00PPPRNBQKB0R"], ["created_at", "2014-06-09 02:54:36.431742"], ["game_id", 1], ["iteration", 7], ["notation", "Nxd4"], ["updated_at", "2014-06-09 02:54:36.431742"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0bqkb0rpppp0ppp00n00n0000000000000NP00000000000PPP00PPPRNBQKB0R"], ["created_at", "2014-06-09 02:54:36.433050"], ["game_id", 1], ["iteration", 8], ["notation", "Nf6"], ["updated_at", "2014-06-09 02:54:36.433050"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0bqkb0rpppp0ppp00n00n0000000000000NP00000N00000PPP00PPPR0BQKB0R"], ["created_at", "2014-06-09 02:54:36.434454"], ["game_id", 1], ["iteration", 9], ["notation", "Nc3"], ["updated_at", "2014-06-09 02:54:36.434454"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0bqk00rpppp0ppp00n00n00000000000b0NP00000N00000PPP00PPPR0BQKB0R"], ["created_at", "2014-06-09 02:54:36.435801"], ["game_id", 1], ["iteration", 10], ["notation", "Bb4"], ["updated_at", "2014-06-09 02:54:36.435801"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0bqk00rpppp0ppp00N00n00000000000b00P00000N00000PPP00PPPR0BQKB0R"], ["created_at", "2014-06-09 02:54:36.437129"], ["game_id", 1], ["iteration", 11], ["notation", "Nxc6"], ["updated_at", "2014-06-09 02:54:36.437129"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0bqk00rp0pp0ppp00p00n00000000000b00P00000N00000PPP00PPPR0BQKB0R"], ["created_at", "2014-06-09 02:54:36.438442"], ["game_id", 1], ["iteration", 12], ["notation", "bxc6"], ["updated_at", "2014-06-09 02:54:36.438442"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0bqk00rp0pp0ppp00p00n00000000000b00P00000NB0000PPP00PPPR0BQK00R"], ["created_at", "2014-06-09 02:54:36.439747"], ["game_id", 1], ["iteration", 13], ["notation", "Bd3"], ["updated_at", "2014-06-09 02:54:36.439747"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0bqk00rp0p00ppp00p00n00000p00000b00P00000NB0000PPP00PPPR0BQK00R"], ["created_at", "2014-06-09 02:54:36.441092"], ["game_id", 1], ["iteration", 14], ["notation", "d5"], ["updated_at", "2014-06-09 02:54:36.441092"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0bqk00rp0p00ppp00p00n00000P00000b00000000NB0000PPP00PPPR0BQK00R"], ["created_at", "2014-06-09 02:54:36.442398"], ["game_id", 1], ["iteration", 15], ["notation", "exd5"], ["updated_at", "2014-06-09 02:54:36.442398"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0bqk00rp0p00ppp00000n00000p00000b00000000NB0000PPP00PPPR0BQK00R"], ["created_at", "2014-06-09 02:54:36.443696"], ["game_id", 1], ["iteration", 16], ["notation", "cxd5"], ["updated_at", "2014-06-09 02:54:36.443696"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0bqk00rp0p00ppp00000n00000p00000b00000000NB0000PPP00PPPR0BQ0RK0"], ["created_at", "2014-06-09 02:54:36.445001"], ["game_id", 1], ["iteration", 17], ["notation", "O-O"], ["updated_at", "2014-06-09 02:54:36.445001"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0bq0rk0p0p00ppp00000n00000p00000b00000000NB0000PPP00PPPR0BQ0RK0"], ["created_at", "2014-06-09 02:54:36.446308"], ["game_id", 1], ["iteration", 18], ["notation", "O-O"], ["updated_at", "2014-06-09 02:54:36.446308"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0bq0rk0p0p00ppp00000n00000p00B00b00000000NB0000PPP00PPPR00Q0RK0"], ["created_at", "2014-06-09 02:54:36.447619"], ["game_id", 1], ["iteration", 19], ["notation", "Bg5"], ["updated_at", "2014-06-09 02:54:36.447619"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0bq0rk0p0000ppp00p00n00000p00B00b00000000NB0000PPP00PPPR00Q0RK0"], ["created_at", "2014-06-09 02:54:36.448954"], ["game_id", 1], ["iteration", 20], ["notation", "c6"], ["updated_at", "2014-06-09 02:54:36.448954"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0bq0rk0p0000ppp00p00n00000p00B00b000000000B0000PPP0NPPPR00Q0RK0"], ["created_at", "2014-06-09 02:54:36.450380"], ["game_id", 1], ["iteration", 21], ["notation", "Ne2"], ["updated_at", "2014-06-09 02:54:36.450380"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0bq0rk0p0000ppp00pb0n00000p00B000000000000B0000PPP0NPPPR00Q0RK0"], ["created_at", "2014-06-09 02:54:36.451681"], ["game_id", 1], ["iteration", 22], ["notation", "Bd6"], ["updated_at", "2014-06-09 02:54:36.451681"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0bq0rk0p0000ppp00pb0n00000p00B000000000000B00N0PPP00PPPR00Q0RK0"], ["created_at", "2014-06-09 02:54:36.453009"], ["game_id", 1], ["iteration", 23], ["notation", "Ng3"], ["updated_at", "2014-06-09 02:54:36.453009"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0bq0rk0p0000pp000pb0n0p000p00B000000000000B00N0PPP00PPPR00Q0RK0"], ["created_at", "2014-06-09 02:54:36.454316"], ["game_id", 1], ["iteration", 24], ["notation", "h6"], ["updated_at", "2014-06-09 02:54:36.454316"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0bq0rk0p0000pp000pb0n0p000p000000000000000B00N0PPPB0PPPR00Q0RK0"], ["created_at", "2014-06-09 02:54:36.455619"], ["game_id", 1], ["iteration", 25], ["notation", "Bd2"], ["updated_at", "2014-06-09 02:54:36.455619"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0bq0rk0p0000pp000pb000p000p0000000000n0000B00N0PPPB0PPPR00Q0RK0"], ["created_at", "2014-06-09 02:54:36.456953"], ["game_id", 1], ["iteration", 26], ["notation", "Ng4"], ["updated_at", "2014-06-09 02:54:36.456953"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0bq0rk0p0000pp000pb000p000p0000000000n0000000N0PPPBBPPPR00Q0RK0"], ["created_at", "2014-06-09 02:54:36.458476"], ["game_id", 1], ["iteration", 27], ["notation", "Be2"], ["updated_at", "2014-06-09 02:54:36.458476"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0b00rk0p0000pp000pb000p000p0000000000nq000000N0PPPBBPPPR00Q0RK0"], ["created_at", "2014-06-09 02:54:36.459852"], ["game_id", 1], ["iteration", 28], ["notation", "Qh4"], ["updated_at", "2014-06-09 02:54:36.459852"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0b00rk0p0000pp000pb000p000p0000000000Bq000000N0PPPB0PPPR00Q0RK0"], ["created_at", "2014-06-09 02:54:36.461156"], ["game_id", 1], ["iteration", 29], ["notation", "Bxg4"], ["updated_at", "2014-06-09 02:54:36.461156"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0000rk0p0000pp000pb000p000p0000000000bq000000N0PPPB0PPPR00Q0RK0"], ["created_at", "2014-06-09 02:54:36.462488"], ["game_id", 1], ["iteration", 30], ["notation", "Bxg4"], ["updated_at", "2014-06-09 02:54:36.462488"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0000rk0p0000pp000pb000p000p0000000000bq000000N0PPPB0PPPR0Q00RK0"], ["created_at", "2014-06-09 02:54:36.463799"], ["game_id", 1], ["iteration", 31], ["notation", "Qc1"], ["updated_at", "2014-06-09 02:54:36.463799"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0000rk0p0000pp000pb000p000p00000000000q000000N0PPPBbPPPR0Q00RK0"], ["created_at", "2014-06-09 02:54:36.465103"], ["game_id", 1], ["iteration", 32], ["notation", "Be2"], ["updated_at", "2014-06-09 02:54:36.465103"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0000rk0p0000pp000pb000p000p00000000000q000000N0PPPBbPPPR0Q0R0K0"], ["created_at", "2014-06-09 02:54:36.466476"], ["game_id", 1], ["iteration", 33], ["notation", "Re1"], ["updated_at", "2014-06-09 02:54:36.466476"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0000rk0p0000pp0b0pb000p000p00000000000q000000N0PPPB0PPPR0Q0R0K0"], ["created_at", "2014-06-09 02:54:36.467861"], ["game_id", 1], ["iteration", 34], ["notation", "Ba6"], ["updated_at", "2014-06-09 02:54:36.467861"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0000rk0p0000pp0b0pb000p000p00000000000q00B000N0PPP00PPPR0Q0R0K0"], ["created_at", "2014-06-09 02:54:36.469174"], ["game_id", 1], ["iteration", 35], ["notation", "Bc3"], ["updated_at", "2014-06-09 02:54:36.469174"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r0000rk0p00000p0b0pb000p000p0p000000000q00B000N0PPP00PPPR0Q0R0K0"], ["created_at", "2014-06-09 02:54:36.470486"], ["game_id", 1], ["iteration", 36], ["notation", "f5"], ["updated_at", "2014-06-09 02:54:36.470486"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r0000rk0p00000p0b0pbR00p000p0p000000000q00B000N0PPP00PPPR0Q000K0"], ["created_at", "2014-06-09 02:54:36.471786"], ["game_id", 1], ["iteration", 37], ["notation", "Re6"], ["updated_at", "2014-06-09 02:54:36.471786"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "000r0rk0p00000p0b0pbR00p000p0p000000000q00B000N0PPP00PPPR0Q000K0"], ["created_at", "2014-06-09 02:54:36.473099"], ["game_id", 1], ["iteration", 38], ["notation", "Rad8"], ["updated_at", "2014-06-09 02:54:36.473099"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "000r0rk0p00000p0b0pbR00p000p0p000000000q00B000N0PPPQ0PPPR00000K0"], ["created_at", "2014-06-09 02:54:36.474428"], ["game_id", 1], ["iteration", 39], ["notation", "Qd2"], ["updated_at", "2014-06-09 02:54:36.474428"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "000r0rk0p00000p0b0pbR00p00000p00000p000q00B000N0PPPQ0PPPR00000K0"], ["created_at", "2014-06-09 02:54:36.475859"], ["game_id", 1], ["iteration", 40], ["notation", "d4"], ["updated_at", "2014-06-09 02:54:36.475859"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "000r0rk0p00000p0b0pbR00pB0000p00000p000q000000N0PPPQ0PPPR00000K0"], ["created_at", "2014-06-09 02:54:36.477151"], ["game_id", 1], ["iteration", 41], ["notation", "Ba5"], ["updated_at", "2014-06-09 02:54:36.477151"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000rk0p00r00p0b0pbR00pB0000p00000p000q000000N0PPPQ0PPPR00000K0"], ["created_at", "2014-06-09 02:54:36.478457"], ["game_id", 1], ["iteration", 42], ["notation", "Rd7"], ["updated_at", "2014-06-09 02:54:36.478457"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000rk0p00r00p0b0pR000pB0000p00000p000q000000N0PPPQ0PPPR00000K0"], ["created_at", "2014-06-09 02:54:36.479775"], ["game_id", 1], ["iteration", 43], ["notation", "Rxd6"], ["updated_at", "2014-06-09 02:54:36.479775"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000rk0p00000p0b0pr000pB0000p00000p000q000000N0PPPQ0PPPR00000K0"], ["created_at", "2014-06-09 02:54:36.481081"], ["game_id", 1], ["iteration", 44], ["notation", "Rxd6"], ["updated_at", "2014-06-09 02:54:36.481081"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000rk0p00000p0b0pr000p00000p000B0p000q000000N0PPPQ0PPPR00000K0"], ["created_at", "2014-06-09 02:54:36.482392"], ["game_id", 1], ["iteration", 45], ["notation", "Bb4"], ["updated_at", "2014-06-09 02:54:36.482392"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000rk0p00000p0b0pr0q0p00000p000B0p0000000000N0PPPQ0PPPR00000K0"], ["created_at", "2014-06-09 02:54:36.483914"], ["game_id", 1], ["iteration", 46], ["notation", "Qf6"], ["updated_at", "2014-06-09 02:54:36.483914"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000rk0p00000p0b0pr0q0p00000p000B0p0000000000N0PPPQ0PPP000R00K0"], ["created_at", "2014-06-09 02:54:36.485297"], ["game_id", 1], ["iteration", 47], ["notation", "Rd1"], ["updated_at", "2014-06-09 02:54:36.485297"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000rk0p00000p0b0p00q0p000r0p000B0p0000000000N0PPPQ0PPP000R00K0"], ["created_at", "2014-06-09 02:54:36.486610"], ["game_id", 1], ["iteration", 48], ["notation", "Rd5"], ["updated_at", "2014-06-09 02:54:36.486610"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000Bk0p00000p0b0p00q0p000r0p00000p0000000000N0PPPQ0PPP000R00K0"], ["created_at", "2014-06-09 02:54:36.487920"], ["game_id", 1], ["iteration", 49], ["notation", "Bxf8"], ["updated_at", "2014-06-09 02:54:36.487920"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000qk0p00000p0b0p0000p000r0p00000p0000000000N0PPPQ0PPP000R00K0"], ["created_at", "2014-06-09 02:54:36.489226"], ["game_id", 1], ["iteration", 50], ["notation", "Qxf8"], ["updated_at", "2014-06-09 02:54:36.489226"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000qk0p00000p0b0p0000p000r0p0N000p000000000000PPPQ0PPP000R00K0"], ["created_at", "2014-06-09 02:54:36.490560"], ["game_id", 1], ["iteration", 51], ["notation", "Nh5"], ["updated_at", "2014-06-09 02:54:36.490560"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0000q0k0p00000p0b0p0000p000r0p0N000p000000000000PPPQ0PPP000R00K0"], ["created_at", "2014-06-09 02:54:36.491905"], ["game_id", 1], ["iteration", 52], ["notation", "Qe8"], ["updated_at", "2014-06-09 02:54:36.491905"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0000q0k0p00000p0b0p0000p000r0p00000p0N0000000000PPPQ0PPP000R00K0"], ["created_at", "2014-06-09 02:54:36.493323"], ["game_id", 1], ["iteration", 53], ["notation", "Nf4"], ["updated_at", "2014-06-09 02:54:36.493323"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0000q0k0p00000p0b0p0000p0000rp00000p0N0000000000PPPQ0PPP000R00K0"], ["created_at", "2014-06-09 02:54:36.494870"], ["game_id", 1], ["iteration", 54], ["notation", "Re5"], ["updated_at", "2014-06-09 02:54:36.494870"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0000q0k0p00000p0b0p0000p0000rp00000p0N0P00000000PPPQ0PP0000R00K0"], ["created_at", "2014-06-09 02:54:36.496420"], ["game_id", 1], ["iteration", 55], ["notation", "h4"], ["updated_at", "2014-06-09 02:54:36.496420"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0000q0k0p00000p0b000000p00p0rp00000p0N0P00000000PPPQ0PP0000R00K0"], ["created_at", "2014-06-09 02:54:36.497884"], ["game_id", 1], ["iteration", 56], ["notation", "c5"], ["updated_at", "2014-06-09 02:54:36.497884"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0000q0k0p00000p0b000000p00p0rp0P000p0N0000000000PPPQ0PP0000R00K0"], ["created_at", "2014-06-09 02:54:36.499218"], ["game_id", 1], ["iteration", 57], ["notation", "h5"], ["updated_at", "2014-06-09 02:54:36.499218"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0000q0k0p00000p0b000000p00p00p0P000prN0000000000PPPQ0PP0000R00K0"], ["created_at", "2014-06-09 02:54:36.500567"], ["game_id", 1], ["iteration", 58], ["notation", "Re4"], ["updated_at", "2014-06-09 02:54:36.500567"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0000q0k0p00000p0b000000p00p00p0P000prN0000P00000PP0Q0PP0000R00K0"], ["created_at", "2014-06-09 02:54:36.501978"], ["game_id", 1], ["iteration", 59], ["notation", "c3"], ["updated_at", "2014-06-09 02:54:36.501978"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0q0000k0p00000p0b000000p00p00p0P000prN0000P00000PP0Q0PP0000R00K0"], ["created_at", "2014-06-09 02:54:36.503312"], ["game_id", 1], ["iteration", 60], ["notation", "Qb8"], ["updated_at", "2014-06-09 02:54:36.503312"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0q0000k0p00000p0b000000p00p00p0P000prN0000P000P0PP0Q0P00000R00K0"], ["created_at", "2014-06-09 02:54:36.504725"], ["game_id", 1], ["iteration", 61], ["notation", "g3"], ["updated_at", "2014-06-09 02:54:36.504725"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "000000k0p00000p0b000000p00p0qp0P000prN0000P000P0PP0Q0P00000R00K0"], ["created_at", "2014-06-09 02:54:36.506058"], ["game_id", 1], ["iteration", 62], ["notation", "Qe5"], ["updated_at", "2014-06-09 02:54:36.506058"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "000000k0p00000p0b00000Np00p0qp0P000pr00000P000P0PP0Q0P00000R00K0"], ["created_at", "2014-06-09 02:54:36.507381"], ["game_id", 1], ["iteration", 63], ["notation", "Ng6"], ["updated_at", "2014-06-09 02:54:36.507381"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "000000k0p00000p0b00q00Np00p00p0P000pr00000P000P0PP0Q0P00000R00K0"], ["created_at", "2014-06-09 02:54:36.508943"], ["game_id", 1], ["iteration", 64], ["notation", "Qd6"], ["updated_at", "2014-06-09 02:54:36.508943"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "000000k0p00000p0b00q000p00p00p0P000prN0000P000P0PP0Q0P00000R00K0"], ["created_at", "2014-06-09 02:54:36.510334"], ["game_id", 1], ["iteration", 65], ["notation", "Nf4"], ["updated_at", "2014-06-09 02:54:36.510334"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "000000k0p00000p0b00q000p00p00p0P0000rN0000Pp00P0PP0Q0P00000R00K0"], ["created_at", "2014-06-09 02:54:36.511666"], ["game_id", 1], ["iteration", 66], ["notation", "d3"], ["updated_at", "2014-06-09 02:54:36.511666"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "000000k0p00000p0b00q000p00p00p0P0000rN000PPp00P0P00Q0P00000R00K0"], ["created_at", "2014-06-09 02:54:36.512997"], ["game_id", 1], ["iteration", 67], ["notation", "b3"], ["updated_at", "2014-06-09 02:54:36.512997"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "000000k0p00000p0b00q000p00000p0P00p0rN000PPp00P0P00Q0P00000R00K0"], ["created_at", "2014-06-09 02:54:36.514497"], ["game_id", 1], ["iteration", 68], ["notation", "c4"], ["updated_at", "2014-06-09 02:54:36.514497"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "000000k0p00000p0b00q000p00000p0P00p0rN000PPp00P0P00Q0P000R0000K0"], ["created_at", "2014-06-09 02:54:36.515976"], ["game_id", 1], ["iteration", 69], ["notation", "Rb1"], ["updated_at", "2014-06-09 02:54:36.515976"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000000p00000pkb00q000p00000p0P00p0rN000PPp00P0P00Q0P000R0000K0"], ["created_at", "2014-06-09 02:54:36.517323"], ["game_id", 1], ["iteration", 70], ["notation", "Kh7"], ["updated_at", "2014-06-09 02:54:36.517323"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000000p00000pkb00q000p00000p0P00p0rN000PPp00P0P00Q0P0K0R000000"], ["created_at", "2014-06-09 02:54:36.518623"], ["game_id", 1], ["iteration", 71], ["notation", "Kh2"], ["updated_at", "2014-06-09 02:54:36.518623"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000000p00000pkbq00000p00000p0P00p0rN000PPp00P0P00Q0P0K0R000000"], ["created_at", "2014-06-09 02:54:36.519999"], ["game_id", 1], ["iteration", 72], ["notation", "Qb6"], ["updated_at", "2014-06-09 02:54:36.519999"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000000p00000pkbq00000p00000p0P00p0rN000PPp00P0P00Q0P000R0000K0"], ["created_at", "2014-06-09 02:54:36.521367"], ["game_id", 1], ["iteration", 73], ["notation", "Kg1"], ["updated_at", "2014-06-09 02:54:36.521367"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000000pb0000pk0q00000p00000p0P00p0rN000PPp00P0P00Q0P000R0000K0"], ["created_at", "2014-06-09 02:54:36.522715"], ["game_id", 1], ["iteration", 74], ["notation", "Bb7"], ["updated_at", "2014-06-09 02:54:36.522715"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000000pb0000pk0q00000p00000p0P00p0rN000PPp00P0PR0Q0P00000000K0"], ["created_at", "2014-06-09 02:54:36.524045"], ["game_id", 1], ["iteration", 75], ["notation", "Rb2"], ["updated_at", "2014-06-09 02:54:36.524045"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000000pb0000pk00q0000p00000p0P00p0rN000PPp00P0PR0Q0P00000000K0"], ["created_at", "2014-06-09 02:54:36.525367"], ["game_id", 1], ["iteration", 76], ["notation", "Qc6"], ["updated_at", "2014-06-09 02:54:36.525367"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000000pb0000pk00q0000p00000p0P00p0rN000PPp0PP0PR0Q0000000000K0"], ["created_at", "2014-06-09 02:54:36.526674"], ["game_id", 1], ["iteration", 77], ["notation", "f3"], ["updated_at", "2014-06-09 02:54:36.526674"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000000pb0000pk0000000p00q00p0P00p0rN000PPp0PP0PR0Q0000000000K0"], ["created_at", "2014-06-09 02:54:36.527980"], ["game_id", 1], ["iteration", 78], ["notation", "Qc5+"], ["updated_at", "2014-06-09 02:54:36.527980"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000000pb0000pk0000000p00q00p0P00p0rN000PPp0PP0PR000Q00000000K0"], ["created_at", "2014-06-09 02:54:36.529323"], ["game_id", 1], ["iteration", 79], ["notation", "Qf2"], ["updated_at", "2014-06-09 02:54:36.529323"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000000pb0000pk0000000p00q00p0P00p00N000PPp0PP0PR000Q000000r0K0"], ["created_at", "2014-06-09 02:54:36.530668"], ["game_id", 1], ["iteration", 80], ["notation", "Re1+"], ["updated_at", "2014-06-09 02:54:36.530668"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000000pb0000pk0000000p00q00p0P00p00N000PPp0PP0PR000Q0K0000r000"], ["created_at", "2014-06-09 02:54:36.532030"], ["game_id", 1], ["iteration", 81], ["notation", "Kh2"], ["updated_at", "2014-06-09 02:54:36.532030"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000000pb0000pk0000000p00000p0P00p00N000PPp0PP0PR000q0K0000r000"], ["created_at", "2014-06-09 02:54:36.533348"], ["game_id", 1], ["iteration", 82], ["notation", "Qxf2+"], ["updated_at", "2014-06-09 02:54:36.533348"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000000pb0000pk0000000p00000p0P00p00N000PPp0PP0P0000R0K0000r000"], ["created_at", "2014-06-09 02:54:36.534705"], ["game_id", 1], ["iteration", 83], ["notation", "Rxf2"], ["updated_at", "2014-06-09 02:54:36.534705"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000000p00000pk0000000p00000p0P00p00N000PPp0bP0P0000R0K0000r000"], ["created_at", "2014-06-09 02:54:36.536089"], ["game_id", 1], ["iteration", 84], ["notation", "Bxf3"], ["updated_at", "2014-06-09 02:54:36.536089"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000000p00000pk0000000p00000p0P00p00NP00PPp0b00P0000R0K0000r000"], ["created_at", "2014-06-09 02:54:36.537394"], ["game_id", 1], ["iteration", 85], ["notation", "g4"], ["updated_at", "2014-06-09 02:54:36.537394"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000000p00000pk0000000p00000p0P00p00NP00PPp0000P000bR0K0000r000"], ["created_at", "2014-06-09 02:54:36.538689"], ["game_id", 1], ["iteration", 86], ["notation", "Be2"], ["updated_at", "2014-06-09 02:54:36.538689"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000000p00000pk0000000p00000p0P00p000P00PPp0000P000bRNK0000r000"], ["created_at", "2014-06-09 02:54:36.540038"], ["game_id", 1], ["iteration", 87], ["notation", "Ng2"], ["updated_at", "2014-06-09 02:54:36.540038"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000000p00000pk0000000p00000p0P00p000P00PP00000P00pbRNK0000r000"], ["created_at", "2014-06-09 02:54:36.541353"], ["game_id", 1], ["iteration", 88], ["notation", "d2"], ["updated_at", "2014-06-09 02:54:36.541353"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000000p00000pk0000000p00000p0P00p000P00PP0N000P00pbR0K0000r000"], ["created_at", "2014-06-09 02:54:36.542727"], ["game_id", 1], ["iteration", 89], ["notation", "Ne3"], ["updated_at", "2014-06-09 02:54:36.542727"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000000p00000pk0000000p00000p0P000000P00pP0N000P00pbR0K0000r000"], ["created_at", "2014-06-09 02:54:36.544191"], ["game_id", 1], ["iteration", 90], ["notation", "cxb3"], ["updated_at", "2014-06-09 02:54:36.544191"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "00000000p00000pk0000000p00000p0P000000P00PP0N000000pbR0K0000r000"], ["created_at", "2014-06-09 02:54:36.545493"], ["game_id", 1], ["iteration", 91], ["notation", "axb3"], ["updated_at", "2014-06-09 02:54:36.545493"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "00000000p00000pk0000000p00000p0P000000b00PP0N000000p0R0K0000r000"], ["created_at", "2014-06-09 02:54:36.546796"], ["game_id", 1], ["iteration", 92], ["notation", "Bxg4"], ["updated_at", "2014-06-09 02:54:36.546796"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "players" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-06-09 02:54:36.554623"], ["name", "Steinitz, Wilhelm"], ["updated_at", "2014-06-09 02:54:36.554623"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "players" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:36.557369"], ["name", "Zukertort, Johannes H"], ["updated_at", "2014-06-09 02:54:36.557369"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.7ms)[0m  INSERT INTO "participations" ("color", "created_at", "game_id", "player_id", "result", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["color", "White"], ["created_at", "2014-06-09 02:54:36.566262"], ["game_id", 1], ["player_id", 1], ["result", "0-1"], ["updated_at", "2014-06-09 02:54:36.566262"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "participations" ("color", "created_at", "game_id", "player_id", "result", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["color", "Black"], ["created_at", "2014-06-09 02:54:36.570510"], ["game_id", 1], ["player_id", 2], ["result", "0-1"], ["updated_at", "2014-06-09 02:54:36.570510"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "games" ("created_at", "date_played", "eco_code", "event", "site", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-06-09 02:54:36.583705"], ["date_played", "1886.01.11"], ["eco_code", "D11"], ["event", "World Championship 1st"], ["site", "USA"], ["updated_at", "2014-06-09 02:54:36.583705"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "rnbqkbnrpppppppp0000000000000000000P000000000000PPP0PPPPRNBQKBNR"], ["created_at", "2014-06-09 02:54:36.585504"], ["game_id", 2], ["iteration", 1], ["notation", "d4"], ["updated_at", "2014-06-09 02:54:36.585504"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "rnbqkbnrppp0pppp00000000000p0000000P000000000000PPP0PPPPRNBQKBNR"], ["created_at", "2014-06-09 02:54:36.586997"], ["game_id", 2], ["iteration", 2], ["notation", "d5"], ["updated_at", "2014-06-09 02:54:36.586997"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "rnbqkbnrppp0pppp00000000000p000000PP000000000000PP00PPPPRNBQKBNR"], ["created_at", "2014-06-09 02:54:36.588366"], ["game_id", 2], ["iteration", 3], ["notation", "c4"], ["updated_at", "2014-06-09 02:54:36.588366"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "rnbqkbnrpp00pppp00p00000000p000000PP000000000000PP00PPPPRNBQKBNR"], ["created_at", "2014-06-09 02:54:36.589709"], ["game_id", 2], ["iteration", 4], ["notation", "c6"], ["updated_at", "2014-06-09 02:54:36.589709"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "rnbqkbnrpp00pppp00p00000000p000000PP00000000P000PP000PPPRNBQKBNR"], ["created_at", "2014-06-09 02:54:36.591036"], ["game_id", 2], ["iteration", 5], ["notation", "e3"], ["updated_at", "2014-06-09 02:54:36.591036"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "rn0qkbnrpp00pppp00p00000000p0b0000PP00000000P000PP000PPPRNBQKBNR"], ["created_at", "2014-06-09 02:54:36.592378"], ["game_id", 2], ["iteration", 6], ["notation", "Bf5"], ["updated_at", "2014-06-09 02:54:36.592378"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "rn0qkbnrpp00pppp00p00000000p0b0000PP000000N0P000PP000PPPR0BQKBNR"], ["created_at", "2014-06-09 02:54:36.593842"], ["game_id", 2], ["iteration", 7], ["notation", "Nc3"], ["updated_at", "2014-06-09 02:54:36.593842"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "rn0qkbnrpp000ppp00p0p000000p0b0000PP000000N0P000PP000PPPR0BQKBNR"], ["created_at", "2014-06-09 02:54:36.595422"], ["game_id", 2], ["iteration", 8], ["notation", "e6"], ["updated_at", "2014-06-09 02:54:36.595422"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "rn0qkbnrpp000ppp00p0p000000p0b0000PP000000N0PN00PP000PPPR0BQKB0R"], ["created_at", "2014-06-09 02:54:36.596879"], ["game_id", 2], ["iteration", 9], ["notation", "Nf3"], ["updated_at", "2014-06-09 02:54:36.596879"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qkbnrpp0n0ppp00p0p000000p0b0000PP000000N0PN00PP000PPPR0BQKB0R"], ["created_at", "2014-06-09 02:54:36.598328"], ["game_id", 2], ["iteration", 10], ["notation", "Nd7"], ["updated_at", "2014-06-09 02:54:36.598328"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qkbnrpp0n0ppp00p0p000000p0b0000PP0000P0N0PN000P000PPPR0BQKB0R"], ["created_at", "2014-06-09 02:54:36.599749"], ["game_id", 2], ["iteration", 11], ["notation", "a3"], ["updated_at", "2014-06-09 02:54:36.599749"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk0nrpp0n0ppp00pbp000000p0b0000PP0000P0N0PN000P000PPPR0BQKB0R"], ["created_at", "2014-06-09 02:54:36.601056"], ["game_id", 2], ["iteration", 12], ["notation", "Bd6"], ["updated_at", "2014-06-09 02:54:36.601056"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk0nrpp0n0ppp00pbp00000Pp0b00000P0000P0N0PN000P000PPPR0BQKB0R"], ["created_at", "2014-06-09 02:54:36.602405"], ["game_id", 2], ["iteration", 13], ["notation", "c5"], ["updated_at", "2014-06-09 02:54:36.602405"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk0nrppbn0ppp00p0p00000Pp0b00000P0000P0N0PN000P000PPPR0BQKB0R"], ["created_at", "2014-06-09 02:54:36.603775"], ["game_id", 2], ["iteration", 14], ["notation", "Bc7"], ["updated_at", "2014-06-09 02:54:36.603775"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk0nrppbn0ppp00p0p00000Pp0b000P0P0000P0N0PN0000000PPPR0BQKB0R"], ["created_at", "2014-06-09 02:54:36.605156"], ["game_id", 2], ["iteration", 15], ["notation", "b4"], ["updated_at", "2014-06-09 02:54:36.605156"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk0nrppbn0ppp00p0000000Pppb000P0P0000P0N0PN0000000PPPR0BQKB0R"], ["created_at", "2014-06-09 02:54:36.606489"], ["game_id", 2], ["iteration", 16], ["notation", "e5"], ["updated_at", "2014-06-09 02:54:36.606489"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk0nrppbn0ppp00p0000000Pppb000P0P0000P0N0PN000000BPPPR0BQK00R"], ["created_at", "2014-06-09 02:54:36.607859"], ["game_id", 2], ["iteration", 17], ["notation", "Be2"], ["updated_at", "2014-06-09 02:54:36.607859"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk00rppbn0ppp00p00n0000Pppb000P0P0000P0N0PN000000BPPPR0BQK00R"], ["created_at", "2014-06-09 02:54:36.609213"], ["game_id", 2], ["iteration", 18], ["notation", "Ngf6"], ["updated_at", "2014-06-09 02:54:36.609213"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk00rppbn0ppp00p00n0000Pppb000P0P0000P0N0PN000B00BPPPR00QK00R"], ["created_at", "2014-06-09 02:54:36.610554"], ["game_id", 2], ["iteration", 19], ["notation", "Bb2"], ["updated_at", "2014-06-09 02:54:36.610554"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk00rppbn0ppp00p00n0000Pp0b000P0Pp000P0N0PN000B00BPPPR00QK00R"], ["created_at", "2014-06-09 02:54:36.611895"], ["game_id", 2], ["iteration", 20], ["notation", "e4"], ["updated_at", "2014-06-09 02:54:36.611895"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk00rppbn0ppp00p00n0000Pp0b000P0Pp000P0N0P0000B0NBPPPR00QK00R"], ["created_at", "2014-06-09 02:54:36.613479"], ["game_id", 2], ["iteration", 21], ["notation", "Nd2"], ["updated_at", "2014-06-09 02:54:36.613479"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk00rppbn0pp000p00n0000Pp0b0p0P0Pp000P0N0P0000B0NBPPPR00QK00R"], ["created_at", "2014-06-09 02:54:36.615015"], ["game_id", 2], ["iteration", 22], ["notation", "h5"], ["updated_at", "2014-06-09 02:54:36.615015"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk00rppbn0pp000p00n0000Pp0b0p0P0Pp000P0N0P00P0B0NBPP0R00QK00R"], ["created_at", "2014-06-09 02:54:36.616519"], ["game_id", 2], ["iteration", 23], ["notation", "h3"], ["updated_at", "2014-06-09 02:54:36.616519"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qkn0rppb00pp000p00n0000Pp0b0p0P0Pp000P0N0P00P0B0NBPP0R00QK00R"], ["created_at", "2014-06-09 02:54:36.656154"], ["game_id", 2], ["iteration", 24], ["notation", "Nf8"], ["updated_at", "2014-06-09 02:54:36.656154"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qkn0rppb00pp000p00n0000Pp0b0pPP0Pp00000N0P00P0B0NBPP0R00QK00R"], ["created_at", "2014-06-09 02:54:36.658029"], ["game_id", 2], ["iteration", 25], ["notation", "a4"], ["updated_at", "2014-06-09 02:54:36.658029"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk00rppb00pp000p00nn000Pp0b0pPP0Pp00000N0P00P0B0NBPP0R00QK00R"], ["created_at", "2014-06-09 02:54:36.659462"], ["game_id", 2], ["iteration", 26], ["notation", "Ng6"], ["updated_at", "2014-06-09 02:54:36.659462"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk00rppb00pp000p00nn00PPp0b0pP00Pp00000N0P00P0B0NBPP0R00QK00R"], ["created_at", "2014-06-09 02:54:36.660833"], ["game_id", 2], ["iteration", 27], ["notation", "b5"], ["updated_at", "2014-06-09 02:54:36.660833"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk00rppb00pp000p00n000PPp0b0pP00Pp00n00N0P00P0B0NBPP0R00QK00R"], ["created_at", "2014-06-09 02:54:36.662213"], ["game_id", 2], ["iteration", 28], ["notation", "Nh4"], ["updated_at", "2014-06-09 02:54:36.662213"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk00rppb00pp000p00n000PPp0b0pP00Pp00n00N0P0PP0B0NBP00R00QK00R"], ["created_at", "2014-06-09 02:54:36.663549"], ["game_id", 2], ["iteration", 29], ["notation", "g3"], ["updated_at", "2014-06-09 02:54:36.663549"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk00rppb00pp000p00n000PPp0b0pP00Pp00000N0P0PP0B0NBPn0R00QK00R"], ["created_at", "2014-06-09 02:54:36.664863"], ["game_id", 2], ["iteration", 30], ["notation", "Ng2+"], ["updated_at", "2014-06-09 02:54:36.664863"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk00rppb00pp000p00n000PPp0b0pP00Pp00000N0P0PP0B0NBPn0R00Q0K0R"], ["created_at", "2014-06-09 02:54:36.666204"], ["game_id", 2], ["iteration", 31], ["notation", "Kf1"], ["updated_at", "2014-06-09 02:54:36.666204"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk00rppb00pp000p00n000PPp0b0pP00Pp00000N0n0PP0B0NBP00R00Q0K0R"], ["created_at", "2014-06-09 02:54:36.667546"], ["game_id", 2], ["iteration", 32], ["notation", "Nxe3+"], ["updated_at", "2014-06-09 02:54:36.667546"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk00rppb00pp000p00n000PPp0b0pP00Pp00000N0P0PP0B0NB000R00Q0K0R"], ["created_at", "2014-06-09 02:54:36.668889"], ["game_id", 2], ["iteration", 33], ["notation", "fxe3"], ["updated_at", "2014-06-09 02:54:36.668889"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk00rpp000pp000p00n000PPp0b0pP00Pp00000N0P0bP0B0NB000R00Q0K0R"], ["created_at", "2014-06-09 02:54:36.670242"], ["game_id", 2], ["iteration", 34], ["notation", "Bxg3"], ["updated_at", "2014-06-09 02:54:36.670242"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk00rpp000pp000p00n000PPp0b0pP00Pp00000N0P0bP0B0NB0K0R00Q000R"], ["created_at", "2014-06-09 02:54:36.671614"], ["game_id", 2], ["iteration", 35], ["notation", "Kg2"], ["updated_at", "2014-06-09 02:54:36.671614"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk00rppb00pp000p00n000PPp0b0pP00Pp00000N0P00P0B0NB0K0R00Q000R"], ["created_at", "2014-06-09 02:54:36.672951"], ["game_id", 2], ["iteration", 36], ["notation", "Bc7"], ["updated_at", "2014-06-09 02:54:36.672951"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk00rppb00pp000p00n000PPp0b0pP00Pp00000N0P00P0B0NB0K0R00000QR"], ["created_at", "2014-06-09 02:54:36.674303"], ["game_id", 2], ["iteration", 37], ["notation", "Qg1"], ["updated_at", "2014-06-09 02:54:36.674303"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk000ppb00pp000p00n0r0PPp0b0pP00Pp00000N0P00P0B0NB0K0R00000QR"], ["created_at", "2014-06-09 02:54:36.675812"], ["game_id", 2], ["iteration", 38], ["notation", "Rh6"], ["updated_at", "2014-06-09 02:54:36.675812"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk000ppb00pp000p00n0r0PPp0b0pP00Pp00000N0P00P0B0NB000R0000KQR"], ["created_at", "2014-06-09 02:54:36.677372"], ["game_id", 2], ["iteration", 39], ["notation", "Kf1"], ["updated_at", "2014-06-09 02:54:36.677372"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r00qk000ppb00pp000p00nr00PPp0b0pP00Pp00000N0P00P0B0NB000R0000KQR"], ["created_at", "2014-06-09 02:54:36.678707"], ["game_id", 2], ["iteration", 40], ["notation", "Rg6"], ["updated_at", "2014-06-09 02:54:36.678707"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r00qk000ppb00pp000p00nr00PPp0b0pP00Pp00000N0P00P0B0NBQ00R0000K0R"], ["created_at", "2014-06-09 02:54:36.680042"], ["game_id", 2], ["iteration", 41], ["notation", "Qf2"], ["updated_at", "2014-06-09 02:54:36.680042"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r000k000ppbq0pp000p00nr00PPp0b0pP00Pp00000N0P00P0B0NBQ00R0000K0R"], ["created_at", "2014-06-09 02:54:36.681378"], ["game_id", 2], ["iteration", 42], ["notation", "Qd7"], ["updated_at", "2014-06-09 02:54:36.681378"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r000k000ppbq0pp000P00nr000Pp0b0pP00Pp00000N0P00P0B0NBQ00R0000K0R"], ["created_at", "2014-06-09 02:54:36.682709"], ["game_id", 2], ["iteration", 43], ["notation", "bxc6"], ["updated_at", "2014-06-09 02:54:36.682709"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r000k000p0bq0pp000p00nr000Pp0b0pP00Pp00000N0P00P0B0NBQ00R0000K0R"], ["created_at", "2014-06-09 02:54:36.684052"], ["game_id", 2], ["iteration", 44], ["notation", "bxc6"], ["updated_at", "2014-06-09 02:54:36.684052"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r000k000p0bq0pp000p00nr000Pp0b0pP00Pp00000N0P00P0B0NBQ00R0000KR0"], ["created_at", "2014-06-09 02:54:36.685369"], ["game_id", 2], ["iteration", 45], ["notation", "Rg1"], ["updated_at", "2014-06-09 02:54:36.685369"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r000k000p0bq0pp000p00nr000Pp000pP00Pp00000N0P00b0B0NBQ00R0000KR0"], ["created_at", "2014-06-09 02:54:36.686701"], ["game_id", 2], ["iteration", 46], ["notation", "Bxh3+"], ["updated_at", "2014-06-09 02:54:36.686701"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r000k000p0bq0pp000p00nr000Pp000pP00Pp00000N0P00b0B0NBQ00R000K0R0"], ["created_at", "2014-06-09 02:54:36.688021"], ["game_id", 2], ["iteration", 47], ["notation", "Ke1"], ["updated_at", "2014-06-09 02:54:36.688021"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r000k000p0bq0pp000p000r000Pp000pP00Pp0n000N0P00b0B0NBQ00R000K0R0"], ["created_at", "2014-06-09 02:54:36.689340"], ["game_id", 2], ["iteration", 48], ["notation", "Ng4"], ["updated_at", "2014-06-09 02:54:36.689340"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r000k000p0bq0pp000p000r000Pp000pP00Pp0B000N0P00b0B0N0Q00R000K0R0"], ["created_at", "2014-06-09 02:54:36.690723"], ["game_id", 2], ["iteration", 49], ["notation", "Bxg4"], ["updated_at", "2014-06-09 02:54:36.690723"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r000k000p0bq0pp000p000r000Pp000pP00Pp0b000N0P0000B0N0Q00R000K0R0"], ["created_at", "2014-06-09 02:54:36.692195"], ["game_id", 2], ["iteration", 50], ["notation", "Bxg4"], ["updated_at", "2014-06-09 02:54:36.692195"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r000k000p0bq0pp000p000r000Pp000pP00Pp0b00000P0000B0NNQ00R000K0R0"], ["created_at", "2014-06-09 02:54:36.693542"], ["game_id", 2], ["iteration", 51], ["notation", "Ne2"], ["updated_at", "2014-06-09 02:54:36.693542"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r000k000p0b0qpp000p000r000Pp000pP00Pp0b00000P0000B0NNQ00R000K0R0"], ["created_at", "2014-06-09 02:54:36.694881"], ["game_id", 2], ["iteration", 52], ["notation", "Qe7"], ["updated_at", "2014-06-09 02:54:36.694881"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r000k000p0b0qpp000p000r000Pp000pP00PpNb00000P0000B0N0Q00R000K0R0"], ["created_at", "2014-06-09 02:54:36.696192"], ["game_id", 2], ["iteration", 53], ["notation", "Nf4"], ["updated_at", "2014-06-09 02:54:36.696192"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r000k000p0b0qpp000p0000r00Pp000pP00PpNb00000P0000B0N0Q00R000K0R0"], ["created_at", "2014-06-09 02:54:36.697449"], ["game_id", 2], ["iteration", 54], ["notation", "Rh6"], ["updated_at", "2014-06-09 02:54:36.697449"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r000k000p0b0qpp000p0000r00Pp000pP00PpNb000B0P000000N0Q00R000K0R0"], ["created_at", "2014-06-09 02:54:36.698969"], ["game_id", 2], ["iteration", 55], ["notation", "Bc3"], ["updated_at", "2014-06-09 02:54:36.698969"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r000k000p0b0qp0000p0000r00Pp00ppP00PpNb000B0P000000N0Q00R000K0R0"], ["created_at", "2014-06-09 02:54:36.700391"], ["game_id", 2], ["iteration", 56], ["notation", "g5"], ["updated_at", "2014-06-09 02:54:36.700391"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r000k000p0b0qp0000p0000r00Pp00ppP00Pp0b000B0P000000NNQ00R000K0R0"], ["created_at", "2014-06-09 02:54:36.701695"], ["game_id", 2], ["iteration", 57], ["notation", "Ne2"], ["updated_at", "2014-06-09 02:54:36.701695"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r000k000p0b0qp0000p00r0000Pp00ppP00Pp0b000B0P000000NNQ00R000K0R0"], ["created_at", "2014-06-09 02:54:36.703031"], ["game_id", 2], ["iteration", 58], ["notation", "Rf6"], ["updated_at", "2014-06-09 02:54:36.703031"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r000k000p0b0qp0000p00r0000Pp00ppP00Pp0b000B0P000000NN0Q0R000K0R0"], ["created_at", "2014-06-09 02:54:36.704359"], ["game_id", 2], ["iteration", 59], ["notation", "Qg2"], ["updated_at", "2014-06-09 02:54:36.704359"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "r000k000p0b0qp0000p0000000Pp00ppP00Pp0b000B0Pr00000NN0Q0R000K0R0"], ["created_at", "2014-06-09 02:54:36.705681"], ["game_id", 2], ["iteration", 60], ["notation", "Rf3"], ["updated_at", "2014-06-09 02:54:36.705681"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "r000k000p0b0qp0000p0000000Pp00ppP00Pp0b000B0Pr000000N0Q0R000KNR0"], ["created_at", "2014-06-09 02:54:36.706994"], ["game_id", 2], ["iteration", 61], ["notation", "Nf1"], ["updated_at", "2014-06-09 02:54:36.706994"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r00k000p0b0qp0000p0000000Pp00ppP00Pp0b000B0Pr000000N0Q0R000KNR0"], ["created_at", "2014-06-09 02:54:36.708300"], ["game_id", 2], ["iteration", 62], ["notation", "Rb8"], ["updated_at", "2014-06-09 02:54:36.708300"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r00k000p0b0qp0000p0000000Pp00ppP00Pp0b000B0Pr00000KN0Q0R0000NR0"], ["created_at", "2014-06-09 02:54:36.709617"], ["game_id", 2], ["iteration", 63], ["notation", "Kd2"], ["updated_at", "2014-06-09 02:54:36.709617"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r00k000p0b0q00000p0000000Pp0pppP00Pp0b000B0Pr00000KN0Q0R0000NR0"], ["created_at", "2014-06-09 02:54:36.710927"], ["game_id", 2], ["iteration", 64], ["notation", "f5"], ["updated_at", "2014-06-09 02:54:36.710927"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r00k000p0b0q00000p00000P0Pp0ppp000Pp0b000B0Pr00000KN0Q0R0000NR0"], ["created_at", "2014-06-09 02:54:36.712227"], ["game_id", 2], ["iteration", 65], ["notation", "a5"], ["updated_at", "2014-06-09 02:54:36.712227"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r00k000p0b0q00000p00000P0Pp00pp000Pppb000B0Pr00000KN0Q0R0000NR0"], ["created_at", "2014-06-09 02:54:36.713471"], ["game_id", 2], ["iteration", 66], ["notation", "f4"], ["updated_at", "2014-06-09 02:54:36.713471"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r00k000p0b0q00000p00000P0Pp00pp000Pppb000B0Pr00000KN0Q0R0000N0R"], ["created_at", "2014-06-09 02:54:36.714784"], ["game_id", 2], ["iteration", 67], ["notation", "Rh1"], ["updated_at", "2014-06-09 02:54:36.714784"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r00k000p0b00q0000p00000P0Pp00pp000Pppb000B0Pr00000KN0Q0R0000N0R"], ["created_at", "2014-06-09 02:54:36.716319"], ["game_id", 2], ["iteration", 68], ["notation", "Qf7"], ["updated_at", "2014-06-09 02:54:36.716319"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r00k000p0b00q0000p00000P0Pp00pp000Pppb000B0Pr00000KN0Q00000RN0R"], ["created_at", "2014-06-09 02:54:36.717667"], ["game_id", 2], ["iteration", 69], ["notation", "Re1"], ["updated_at", "2014-06-09 02:54:36.717667"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r00k000p0b00q0000p00000P0Pp00pp000Pp0b000B0pr00000KN0Q00000RN0R"], ["created_at", "2014-06-09 02:54:36.719010"], ["game_id", 2], ["iteration", 70], ["notation", "fxe3+"], ["updated_at", "2014-06-09 02:54:36.719010"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r00k000p0b00q0000p00000P0Pp00pp000Pp0b000B0Nr00000KN0Q00000R00R"], ["created_at", "2014-06-09 02:54:36.720322"], ["game_id", 2], ["iteration", 71], ["notation", "Nxe3"], ["updated_at", "2014-06-09 02:54:36.720322"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r00k000p0b00q0000p00000P0Pp00pp000Pp0b000B0N000000KNrQ00000R00R"], ["created_at", "2014-06-09 02:54:36.721559"], ["game_id", 2], ["iteration", 72], ["notation", "Rf2"], ["updated_at", "2014-06-09 02:54:36.721559"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r00k000p0b00q0000p00000P0Pp00pp000Pp0b000B0N000000KNQ000000R00R"], ["created_at", "2014-06-09 02:54:36.722891"], ["game_id", 2], ["iteration", 73], ["notation", "Qxf2"], ["updated_at", "2014-06-09 02:54:36.722891"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r00k000p0b0000000p00000P0Pp00pp000Pp0b000B0N000000KNq000000R00R"], ["created_at", "2014-06-09 02:54:36.724405"], ["game_id", 2], ["iteration", 74], ["notation", "Qxf2"], ["updated_at", "2014-06-09 02:54:36.724405"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r00k000p0b0000000p00000P0Pp00pp000Pp0N000B00000000KNq000000R00R"], ["created_at", "2014-06-09 02:54:36.725760"], ["game_id", 2], ["iteration", 75], ["notation", "Nxg4"], ["updated_at", "2014-06-09 02:54:36.725760"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r00k000p000000000p00000P0Pp00pp000PpbN000B00000000KNq000000R00R"], ["created_at", "2014-06-09 02:54:36.727082"], ["game_id", 2], ["iteration", 76], ["notation", "Bf4+"], ["updated_at", "2014-06-09 02:54:36.727082"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r00k000p000000000p00000P0Pp00pp000PpbN000B0000000K0Nq000000R00R"], ["created_at", "2014-06-09 02:54:36.728404"], ["game_id", 2], ["iteration", 77], ["notation", "Kc2"], ["updated_at", "2014-06-09 02:54:36.728404"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r00k000p000000000p00000P0Pp00p0000Ppbp000B0000000K0Nq000000R00R"], ["created_at", "2014-06-09 02:54:36.729715"], ["game_id", 2], ["iteration", 78], ["notation", "hxg4"], ["updated_at", "2014-06-09 02:54:36.729715"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r00k000p000000000p00000P0Pp00p0000Ppbp00000000000KBNq000000R00R"], ["created_at", "2014-06-09 02:54:36.731036"], ["game_id", 2], ["iteration", 79], ["notation", "Bd2"], ["updated_at", "2014-06-09 02:54:36.731036"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r00k000p000000000p00000P0Pp00p0000P0bp00000p00000KBNq000000R00R"], ["created_at", "2014-06-09 02:54:36.732331"], ["game_id", 2], ["iteration", 80], ["notation", "e3"], ["updated_at", "2014-06-09 02:54:36.732331"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r00k000p000000000p00000P0Pp00p0000P0bp00000p00000K0Nq0000B0R00R"], ["created_at", "2014-06-09 02:54:36.733647"], ["game_id", 2], ["iteration", 81], ["notation", "Bc1"], ["updated_at", "2014-06-09 02:54:36.733647"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r00k000p000000000p00000P0Pp00p0000P0bp00000p00000K0N0q000B0R00R"], ["created_at", "2014-06-09 02:54:36.734961"], ["game_id", 2], ["iteration", 82], ["notation", "Qg2"], ["updated_at", "2014-06-09 02:54:36.734961"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r00k000p000000000p00000P0Pp00p0000P0bp000K0p0000000N0q000B0R00R"], ["created_at", "2014-06-09 02:54:36.736288"], ["game_id", 2], ["iteration", 83], ["notation", "Kc3"], ["updated_at", "2014-06-09 02:54:36.736288"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r000000p00k000000p00000P0Pp00p0000P0bp000K0p0000000N0q000B0R00R"], ["created_at", "2014-06-09 02:54:36.737614"], ["game_id", 2], ["iteration", 84], ["notation", "Kd7"], ["updated_at", "2014-06-09 02:54:36.737614"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r000000p00k000R00p00000P0Pp00p0000P0bp000K0p0000000N0q000B0R000"], ["created_at", "2014-06-09 02:54:36.738910"], ["game_id", 2], ["iteration", 85], ["notation", "Rh7+"], ["updated_at", "2014-06-09 02:54:36.738910"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r000000p000000R00p0k000P0Pp00p0000P0bp000K0p0000000N0q000B0R000"], ["created_at", "2014-06-09 02:54:36.740234"], ["game_id", 2], ["iteration", 86], ["notation", "Ke6"], ["updated_at", "2014-06-09 02:54:36.740234"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r000000p000000000p0k00RP0Pp00p0000P0bp000K0p0000000N0q000B0R000"], ["created_at", "2014-06-09 02:54:36.741547"], ["game_id", 2], ["iteration", 87], ["notation", "Rh6+"], ["updated_at", "2014-06-09 02:54:36.741547"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r000000p000000000p0000RP0Pp0kp0000P0bp000K0p0000000N0q000B0R000"], ["created_at", "2014-06-09 02:54:36.742861"], ["game_id", 2], ["iteration", 88], ["notation", "Kf5"], ["updated_at", "2014-06-09 02:54:36.742861"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r000000p000000000p0000RP0Pp0kp0000P0bp000K0B0000000N0q00000R000"], ["created_at", "2014-06-09 02:54:36.744279"], ["game_id", 2], ["iteration", 89], ["notation", "Bxe3"], ["updated_at", "2014-06-09 02:54:36.744279"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r000000p000000000p0000RP0Pp0kp0000P00p000K0b0000000N0q00000R000"], ["created_at", "2014-06-09 02:54:36.745786"], ["game_id", 2], ["iteration", 90], ["notation", "Bxe3"], ["updated_at", "2014-06-09 02:54:36.745786"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["board_position", "0r000000p000000000p0000RP0Pp0kp0000P00p000K0b0000000N0q000000R00"], ["created_at", "2014-06-09 02:54:36.747121"], ["game_id", 2], ["iteration", 91], ["notation", "Rf1+"], ["updated_at", "2014-06-09 02:54:36.747121"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "moves" ("board_position", "created_at", "game_id", "iteration", "notation", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["board_position", "0r000000p000000000p0000RP0Pp0kp0000P0bp000K000000000N0q000000R00"], ["created_at", "2014-06-09 02:54:36.748424"], ["game_id", 2], ["iteration", 92], ["notation", "Bf4"], ["updated_at", "2014-06-09 02:54:36.748424"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "players" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:36.749776"], ["name", "Zukertort, Johannes H"], ["updated_at", "2014-06-09 02:54:36.749776"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "players" ("created_at", "name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", "2014-06-09 02:54:36.751044"], ["name", "Steinitz, Wilhelm"], ["updated_at", "2014-06-09 02:54:36.751044"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "participations" ("color", "created_at", "game_id", "player_id", "result", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["color", "White"], ["created_at", "2014-06-09 02:54:36.752343"], ["game_id", 2], ["player_id", 3], ["result", "0-1"], ["updated_at", "2014-06-09 02:54:36.752343"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "participations" ("color", "created_at", "game_id", "player_id", "result", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["color", "Black"], ["created_at", "2014-06-09 02:54:36.753669"], ["game_id", 2], ["player_id", 4], ["result", "0-1"], ["updated_at", "2014-06-09 02:54:36.753669"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (9.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:36.992813"], ["email", "verdie@heidenreichabernathy.org"], ["name", "Ms. Delmer Ullrich"], ["provider", "google"], ["uid", "nisi"], ["updated_at", "2014-06-09 02:54:36.992813"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.005233"], ["email", "quinton.waters@goldnerkuhlman.name"], ["name", "Austen Lind"], ["provider", "google"], ["uid", "ut"], ["updated_at", "2014-06-09 02:54:37.005233"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.007497"], ["email", "baylee@mueller.name"], ["name", "Cameron Mills"], ["provider", "google"], ["uid", "ut"], ["updated_at", "2014-06-09 02:54:37.007497"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.009425"], ["email", "deie@braun.net"], ["name", "Antonia Hackett"], ["provider", "google"], ["uid", "nostrum"], ["updated_at", "2014-06-09 02:54:37.009425"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.011151"], ["email", "florencio@faydavis.com"], ["name", "Lynn Renner"], ["provider", "google"], ["uid", "consequatur"], ["updated_at", "2014-06-09 02:54:37.011151"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.012881"], ["email", "jeffry@dubuqueschiller.info"], ["name", "Beaulah Feeney"], ["provider", "google"], ["uid", "dolor"], ["updated_at", "2014-06-09 02:54:37.012881"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.014744"], ["email", "maxie@hane.org"], ["name", "Selmer Yost DVM"], ["provider", "google"], ["uid", "voluptatem"], ["updated_at", "2014-06-09 02:54:37.014744"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.016484"], ["email", "casey@champlin.info"], ["name", "Johathan Gibson"], ["provider", "google"], ["uid", "omnis"], ["updated_at", "2014-06-09 02:54:37.016484"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.018266"], ["email", "kylie.considine@brekke.org"], ["name", "Schuyler Rosenbaum"], ["provider", "google"], ["uid", "non"], ["updated_at", "2014-06-09 02:54:37.018266"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.020008"], ["email", "tom.ullrich@wunsch.net"], ["name", "Jammie Will"], ["provider", "google"], ["uid", "non"], ["updated_at", "2014-06-09 02:54:37.020008"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.021733"], ["email", "andreanne_rutherford@kohlerthiel.info"], ["name", "Rasheed Kling"], ["provider", "google"], ["uid", "ratione"], ["updated_at", "2014-06-09 02:54:37.021733"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.023512"], ["email", "shayna_jast@stromankuhic.com"], ["name", "Ellsworth Pfeffer V"], ["provider", "google"], ["uid", "cupiditate"], ["updated_at", "2014-06-09 02:54:37.023512"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.025228"], ["email", "lera_schowalter@dachhaag.com"], ["name", "Elsa Cummerata"], ["provider", "google"], ["uid", "quos"], ["updated_at", "2014-06-09 02:54:37.025228"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.026967"], ["email", "orland@rohanwaelchi.org"], ["name", "Benny Dach II"], ["provider", "google"], ["uid", "voluptas"], ["updated_at", "2014-06-09 02:54:37.026967"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.028704"], ["email", "rita@robel.name"], ["name", "Devon Reichert"], ["provider", "google"], ["uid", "itaque"], ["updated_at", "2014-06-09 02:54:37.028704"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.030433"], ["email", "haylee@hermannhermiston.org"], ["name", "Arnaldo Leannon"], ["provider", "google"], ["uid", "et"], ["updated_at", "2014-06-09 02:54:37.030433"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.032139"], ["email", "agnes@powlowski.net"], ["name", "Joanny Sanford"], ["provider", "google"], ["uid", "impedit"], ["updated_at", "2014-06-09 02:54:37.032139"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.033868"], ["email", "johnnie.kirlin@eichmanngoldner.net"], ["name", "Shemar Schulist"], ["provider", "google"], ["uid", "asperiores"], ["updated_at", "2014-06-09 02:54:37.033868"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.035567"], ["email", "rodolfo@boehm.name"], ["name", "Thad Kassulke IV"], ["provider", "google"], ["uid", "qui"], ["updated_at", "2014-06-09 02:54:37.035567"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "provider", "uid", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.037356"], ["email", "moises@runolfon.info"], ["name", "Precious Muller"], ["provider", "google"], ["uid", "sit"], ["updated_at", "2014-06-09 02:54:37.037356"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.045037"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.045037"], ["user_id", 2]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.047738"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.047738"], ["user_id", 10]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.049038"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.049038"], ["user_id", 16]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.050282"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.050282"], ["user_id", 7]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.051545"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.051545"], ["user_id", 20]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.052775"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.052775"], ["user_id", 11]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.054000"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.054000"], ["user_id", 15]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.055192"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.055192"], ["user_id", 7]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.056370"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.056370"], ["user_id", 13]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.057592"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.057592"], ["user_id", 11]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.058883"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.058883"], ["user_id", 2]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.060193"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.060193"], ["user_id", 11]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.061391"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.061391"], ["user_id", 6]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.062558"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.062558"], ["user_id", 18]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.063917"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.063917"], ["user_id", 16]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.065186"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.065186"], ["user_id", 10]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.066395"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.066395"], ["user_id", 7]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.067717"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.067717"], ["user_id", 15]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.068929"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.068929"], ["user_id", 3]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.070183"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.070183"], ["user_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.071469"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.071469"], ["user_id", 18]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.072666"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.072666"], ["user_id", 19]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.074033"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.074033"], ["user_id", 15]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.075272"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.075272"], ["user_id", 3]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.076483"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.076483"], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.077712"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.077712"], ["user_id", 16]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.078918"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.078918"], ["user_id", 11]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.080110"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.080110"], ["user_id", 17]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.081391"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.081391"], ["user_id", 12]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.082708"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.082708"], ["user_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.083957"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.083957"], ["user_id", 20]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.085132"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.085132"], ["user_id", 18]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.086326"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.086326"], ["user_id", 16]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.087510"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.087510"], ["user_id", 6]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.088696"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.088696"], ["user_id", 10]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.089918"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.089918"], ["user_id", 11]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.091272"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.091272"], ["user_id", 11]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.092495"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.092495"], ["user_id", 13]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.093730"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.093730"], ["user_id", 13]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.094948"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.094948"], ["user_id", 13]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.096124"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.096124"], ["user_id", 8]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.097413"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.097413"], ["user_id", 12]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.098727"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.098727"], ["user_id", 4]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.099925"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.099925"], ["user_id", 16]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.101113"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.101113"], ["user_id", 11]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.102460"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.102460"], ["user_id", 13]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.103709"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.103709"], ["user_id", 16]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.104914"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.104914"], ["user_id", 2]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.106146"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.106146"], ["user_id", 15]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.107329"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.107329"], ["user_id", 5]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.108578"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.108578"], ["user_id", 13]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.109881"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.109881"], ["user_id", 7]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.111082"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.111082"], ["user_id", 11]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.112246"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.112246"], ["user_id", 14]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.113598"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.113598"], ["user_id", 6]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.114965"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.114965"], ["user_id", 9]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.116268"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.116268"], ["user_id", 5]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.117596"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.117596"], ["user_id", 17]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.118781"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.118781"], ["user_id", 15]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.119975"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.119975"], ["user_id", 14]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.121596"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.121596"], ["user_id", 5]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.123254"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.123254"], ["user_id", 20]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.124495"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.124495"], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.125783"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.125783"], ["user_id", 17]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.126941"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.126941"], ["user_id", 6]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.128201"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.128201"], ["user_id", 10]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.129499"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.129499"], ["user_id", 3]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.130775"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.130775"], ["user_id", 12]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.132030"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.132030"], ["user_id", 2]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.133568"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.133568"], ["user_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.134847"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.134847"], ["user_id", 1]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.136113"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.136113"], ["user_id", 11]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.137430"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.137430"], ["user_id", 14]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.138733"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.138733"], ["user_id", 10]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.139970"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.139970"], ["user_id", 10]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.141365"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.141365"], ["user_id", 4]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.142559"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.142559"], ["user_id", 5]]
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.143742"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.143742"], ["user_id", 20]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.144938"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.144938"], ["user_id", 4]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.146134"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.146134"], ["user_id", 14]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.147308"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.147308"], ["user_id", 7]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.148502"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.148502"], ["user_id", 12]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.149715"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.149715"], ["user_id", 4]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.150951"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.150951"], ["user_id", 9]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.152156"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.152156"], ["user_id", 3]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.153388"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.153388"], ["user_id", 6]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.154723"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.154723"], ["user_id", 15]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.155905"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.155905"], ["user_id", 7]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.157162"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.157162"], ["user_id", 13]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.158409"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.158409"], ["user_id", 6]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.159717"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.159717"], ["user_id", 2]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.160926"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.160926"], ["user_id", 20]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.162092"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.162092"], ["user_id", 19]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.163283"], ["favoritible_id", 2], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.163283"], ["user_id", 8]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.164468"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.164468"], ["user_id", 13]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.165723"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.165723"], ["user_id", 8]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.167018"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.167018"], ["user_id", 7]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.168214"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.168214"], ["user_id", 3]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2014-06-09 02:54:37.169409"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.169409"], ["user_id", 9]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "favorites" ("created_at", "favoritible_id", "favoritible_type", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2014-06-09 02:54:37.170754"], ["favoritible_id", 1], ["favoritible_type", "Game"], ["updated_at", "2014-06-09 02:54:37.170754"], ["user_id", 17]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+
+
+Started GET "/" for 127.0.0.1 at 2014-06-08 21:56:30 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WelcomePageController#index as HTML
+  Rendered welcome_page/index.html.erb within layouts/application (1.0ms)
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (16.4ms)
+Completed 200 OK in 519ms (Views: 508.4ms | ActiveRecord: 2.5ms | Solr: 0.0ms)
+
+
+Started GET "/assets/chess.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/games.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/user_landing.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/header.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:31 -0500
+
+
+Started GET "/assets/king_background.png" for 127.0.0.1 at 2014-06-08 21:56:32 -0500
+
+
+Started GET "/games" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+Processing by GamesController#index as HTML
+  [1m[36mGame Load (0.3ms)[0m  [1mSELECT "games".* FROM "games"[0m
+  Rendered games/index.html.erb within layouts/application (4.3ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.3ms)
+Completed 200 OK in 15ms (Views: 11.5ms | ActiveRecord: 0.5ms | Solr: 0.0ms)
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:34 -0500
+
+
+Started GET "/games/1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGame Load (0.4ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 1]]
+  [1m[36mMove Load (0.4ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 1]]
+  Rendered games/show.html.erb within layouts/application (15.9ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.6ms)
+Completed 200 OK in 39ms (Views: 22.2ms | ActiveRecord: 2.8ms | Solr: 0.0ms)
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/gold.jpeg" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/wr.png" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/wn.png" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/wb.png" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/wk.png" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/wq.png" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/wp.png" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/br.png" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/bp.png" for 127.0.0.1 at 2014-06-08 21:56:36 -0500
+
+
+Started GET "/assets/bb.png" for 127.0.0.1 at 2014-06-08 21:56:37 -0500
+
+
+Started GET "/assets/bq.png" for 127.0.0.1 at 2014-06-08 21:56:37 -0500
+
+
+Started GET "/assets/bk.png" for 127.0.0.1 at 2014-06-08 21:56:37 -0500
+
+
+Started GET "/assets/bn.png" for 127.0.0.1 at 2014-06-08 21:56:37 -0500
+
+
+Started GET "/games/2" for 127.0.0.1 at 2014-06-08 21:56:38 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mGame Load (0.2ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 2]]
+  [1m[36mMove Load (0.4ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 2]]
+  Rendered games/show.html.erb within layouts/application (6.8ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.2ms)
+Completed 200 OK in 16ms (Views: 12.8ms | ActiveRecord: 1.1ms | Solr: 0.0ms)
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:38 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:38 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:38 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:38 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:38 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/games/2" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mGame Load (0.3ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 2]]
+  [1m[36mMove Load (0.3ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 2]]
+  Rendered games/show.html.erb within layouts/application (6.1ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.1ms)
+Completed 200 OK in 15ms (Views: 12.9ms | ActiveRecord: 1.0ms | Solr: 0.0ms)
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:39 -0500
+
+
+Started GET "/games/1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGame Load (0.2ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 1]]
+  [1m[36mMove Load (0.3ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 1]]
+  Rendered games/show.html.erb within layouts/application (6.3ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.1ms)
+Completed 200 OK in 15ms (Views: 13.3ms | ActiveRecord: 1.0ms | Solr: 0.0ms)
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/games/1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGame Load (0.5ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 1]]
+  [1m[36mMove Load (0.6ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 1]]
+  Rendered games/show.html.erb within layouts/application (10.0ms)
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (68.9ms)
+Completed 200 OK in 89ms (Views: 85.0ms | ActiveRecord: 1.7ms | Solr: 0.0ms)
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:40 -0500
+
+
+Started GET "/games/1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGame Load (0.3ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 1]]
+  [1m[36mMove Load (0.3ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 1]]
+  Rendered games/show.html.erb within layouts/application (6.2ms)
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.5ms)
+Completed 200 OK in 16ms (Views: 12.2ms | ActiveRecord: 1.1ms | Solr: 0.0ms)
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:42 -0500
+
+
+Started GET "/games/1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGame Load (0.2ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 1]]
+  [1m[36mMove Load (0.9ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 1]]
+  Rendered games/show.html.erb within layouts/application (11.3ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.1ms)
+Completed 200 OK in 20ms (Views: 17.3ms | ActiveRecord: 1.6ms | Solr: 0.0ms)
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/games/2" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mGame Load (0.3ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 2]]
+  [1m[36mMove Load (0.6ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 2]]
+  Rendered games/show.html.erb within layouts/application (9.3ms)
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.4ms)
+Completed 200 OK in 24ms (Views: 18.9ms | ActiveRecord: 1.8ms | Solr: 0.0ms)
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:43 -0500
+
+
+Started GET "/games/1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGame Load (0.2ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 1]]
+  [1m[36mMove Load (0.3ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 1]]
+  Rendered games/show.html.erb within layouts/application (6.2ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.2ms)
+Completed 200 OK in 16ms (Views: 13.7ms | ActiveRecord: 0.9ms | Solr: 0.0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:44 -0500
+
+
+Started GET "/games/1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGame Load (0.2ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 1]]
+  [1m[36mMove Load (0.5ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 1]]
+  Rendered games/show.html.erb within layouts/application (10.2ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.2ms)
+Completed 200 OK in 19ms (Views: 16.3ms | ActiveRecord: 1.2ms | Solr: 0.0ms)
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/games/2" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mGame Load (0.2ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 2]]
+  [1m[36mMove Load (0.3ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 2]]
+  Rendered games/show.html.erb within layouts/application (5.9ms)
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (2.4ms)
+Completed 200 OK in 16ms (Views: 13.3ms | ActiveRecord: 1.0ms | Solr: 0.0ms)
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:45 -0500
+
+
+Started GET "/games/1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGame Load (0.2ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 1]]
+  [1m[36mMove Load (0.3ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 1]]
+  Rendered games/show.html.erb within layouts/application (7.9ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.1ms)
+Completed 200 OK in 16ms (Views: 13.5ms | ActiveRecord: 0.9ms | Solr: 0.0ms)
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:46 -0500
+
+
+Started GET "/games/1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGame Load (0.2ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 1]]
+  [1m[36mMove Load (0.3ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 1]]
+  Rendered games/show.html.erb within layouts/application (5.8ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.1ms)
+Completed 200 OK in 14ms (Views: 11.7ms | ActiveRecord: 0.9ms | Solr: 0.0ms)
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+
+
+Started GET "/games/2" for 127.0.0.1 at 2014-06-08 21:56:47 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mGame Load (0.3ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 2]]
+  [1m[36mMove Load (0.7ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 2]]
+  Rendered games/show.html.erb within layouts/application (9.3ms)
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (2.0ms)
+Completed 200 OK in 21ms (Views: 16.5ms | ActiveRecord: 1.8ms | Solr: 0.0ms)
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/games/1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+Processing by GamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGame Load (0.2ms)[0m  [1mSELECT  "games".* FROM "games"  WHERE "games"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "moves"  WHERE "moves"."game_id" = $1  [["game_id", 1]]
+  [1m[36mMove Load (0.5ms)[0m  [1mSELECT "moves".* FROM "moves"  WHERE "moves"."game_id" = $1[0m  [["game_id", 1]]
+  Rendered games/show.html.erb within layouts/application (9.4ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "games"
+  Rendered layouts/_header.html.erb (1.1ms)
+Completed 200 OK in 17ms (Views: 14.9ms | ActiveRecord: 1.0ms | Solr: 0.0ms)
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:56:48 -0500
+
+
+Started GET "/about" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+Processing by WelcomePageController#about as HTML
+  Rendered welcome_page/about.html.erb within layouts/application (0.5ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "games"[0m
+  Rendered layouts/_header.html.erb (1.4ms)
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.2ms | Solr: 0.0ms)
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+
+
+Started GET "/assets/welcome_page.css?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+
+
+Started GET "/assets/chess_set.css?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+
+
+Started GET "/assets/chess-logic.js?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+
+
+Started GET "/assets/games.js?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+
+
+Started GET "/assets/welcome_page.js?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-08 21:57:09 -0500

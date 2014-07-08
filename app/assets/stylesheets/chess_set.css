@@ -1,0 +1,61 @@
+/* Black pieces */
+.p {
+  background: url('bp.png');
+  background-size: 100%;
+}
+
+.r {
+  background: url('br.png');
+  background-size: 100%;
+}
+
+.n {
+  background: url('bn.png');
+  background-size: 100%;
+}
+
+.b {
+  background: url('bb.png');
+  background-size: 100%;
+}
+
+.q {
+  background: url('bq.png');
+  background-size: 100%;
+}
+
+.k {
+  background: url('bk.png');
+  background-size: 100%;
+}
+
+/* White pieces */
+.P {
+  background: url('wp.png');
+  background-size: 100%;
+}
+
+.R {
+  background: url('wr.png');
+  background-size: 100%;
+}
+
+.N {
+  background: url('wn.png');
+  background-size: 100%;
+}
+
+.B {
+  background: url('wb.png');
+  background-size: 100%;
+}
+
+.Q {
+  background: url('wq.png');
+  background-size: 100%;
+}
+
+.K {
+  background: url('wk.png');
+  background-size: 100%;
+}

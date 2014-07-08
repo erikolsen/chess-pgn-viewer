@@ -1,0 +1,10 @@
+<div class='user_landing'>
+  <div class='search_result'>
+    <h2>Search Results</h2>
+    <% @results.each do |r| %>
+      <ul>
+        <li><%= link_to r.event, game_path(r.id) %>, Date: <%=r.date_played %>, ECO Code: <%= r.eco_code %></li>
+      </ul>
+    <% end %>
+  </div>
+</div>

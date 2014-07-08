@@ -1,0 +1,49 @@
+<div class='user_landing show_game_border'>
+
+  <div class='columns_for_chess_board buttons_for_chess_board'>
+  <input type='submit' value='Previous' class='btns'>
+
+  <input name='current_move' type='hidden' value='0'>
+  <input type='submit' value='Next' id='next-btn' class='btns'>
+  <input name='total_moves' type='hidden' value='<%= @moves.count %>'>
+  <div class= 'fav_and_jump_div'>
+    <input id='move_count' type='text'>
+    <input type='submit' value='jump to'>
+  <div>
+
+  <a class='move' id='0' href='rnbqkbnrpppppppp00000000000000000000000000000000PPPPPPPPRNBQKBNR'>Reset Board</a>
+  </div>
+</div>
+  </div>
+
+<div class='board_div columns_for_chess_board'>
+  <table class='chess-board'>
+    <% @rows.each_with_index do |r, i| %>
+      <tr>
+        <% @cols.each_with_index do |col, ind| %>
+          <td id='<%=col%><%=r%>'></td>
+        <%end%>
+      </tr>
+    <%end%>
+  </table>
+
+</div>
+
+<div class='fen_list columns_for_chess_board'>
+  <table>
+
+  <% @moves.each_slice(2) do |move| %>
+    <tr>
+      <td>
+        <a class='move' id='<%= move[0].iteration %>' href='<%= move[0].board_position %>'><%= move[0].notation %></a>
+      </td>
+      <td>
+        <a class='move' id='<%= move[1].iteration %>' href='<%= move[1].board_position %>'><%= move[1].notation %></a>
+      </td>
+    <tr>
+  <% end %>
+  </table>
+</div>
+<%= 'blah' %>
+
+</div>
