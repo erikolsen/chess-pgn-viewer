@@ -56,3 +56,9 @@ end
 gem 'coveralls', require: false
 gem 'omniauth-gplus', '~> 2.0'
 gem "omniauth-google-oauth2"
+
+#for deploy to heroku
+gem 'rails_12factor', group: :production
+
+
+ruby "2.1.1"
