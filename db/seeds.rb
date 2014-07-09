@@ -17,7 +17,8 @@ def parse_fen(fen)
 end
 
 # Populate games variable
-games = PGN.parse(File.read('public/WCC.pgn'))
+# games = PGN.parse(File.read('public/WCC.pgn'))
+games = PGN.parse(File.read('public/Karpov.pgn'))
 
 # Iterating through each game
 games.each do |game|
