@@ -1,5 +1,5 @@
 require 'pgn'
-require 'faker'
+
 
 # Parse FEN
 def parse_fen(fen)
