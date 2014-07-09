@@ -11,14 +11,14 @@
       <%= link_to 'explore games', games_path %>
     </li>
     <li class='left-nav'>
-      <% num = Game.count %>
-      <% rand = (1..num).to_a.sample %>
-      <%= link_to 'random game', "/games/#{rand}" %>
+      <%# num = Game.count %>
+      <%# rand = (1..num).to_a.sample %>
+      <%=# link_to 'random game', "/games/#{rand}" %>
     </li>
 
       <% if session[:user_id].nil? %>
       <li class='left-nav'>
-        <%= link_to 'login', '/auth/google_oauth2' %>
+        <%=# link_to 'login', '/auth/google_oauth2' %>
       </li>
       <% else %>
       <li class='left-nav'>
@@ -33,9 +33,9 @@
 
     <li class='right-nav'>
       <div id="search">
-            <%= form_tag '/search', :method => 'get' do %>
-            <%= text_field_tag :search, params[:search], :id => 'search_field' %>
-            <%= submit_tag "Search", :name => nil %>
+            <%=# form_tag '/search', :method => 'get' do %>
+            <%=# text_field_tag :search, params[:search], :id => 'search_field' %>
+            <%=# submit_tag "Search", :name => nil %>
             <% end %>
       </div>
     </li>
