@@ -18,7 +18,7 @@ end
 
 # Populate games variable
 # games = PGN.parse(File.read('public/WCC.pgn'))
-games = PGN.parse(File.read('public/Karpov.pgn'))
+games = PGN.parse(File.read('public/Karpov531.pgn'))
 
 # Iterating through each game
 games.each do |game|
@@ -44,10 +44,10 @@ games.each do |game|
   b_player_participation = Participation.create(game_id: game.id, player_id: b_player.id, color: "Black", result: tags['Result'])
 end
 
-20.times do
-  User.create(name: Faker::Name.name, email: Faker::Internet.email, uid: Faker::Lorem.word, provider: 'google')
-end
+# 20.times do
+#   User.create(name: Faker::Name.name, email: Faker::Internet.email, uid: Faker::Lorem.word, provider: 'google')
+# end
 
-100.times do
-  Favorite.create(user_id: rand(1..20), favoritible_id: rand(1..2), favoritible_type: 'Game')
-end
+# 100.times do
+#   Favorite.create(user_id: rand(1..20), favoritible_id: rand(1..2), favoritible_type: 'Game')
+# end
