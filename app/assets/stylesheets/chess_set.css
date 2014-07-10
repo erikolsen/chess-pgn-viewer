@@ -1,57 +1,57 @@
 /* Black pieces */
 .p {
-  background: image-url('bp.png');
+  background: url('bp.png');
   background-size: 100%;
 }
 
 .r {
-  background: image-url('br.png');
+  background: url('br.png');
   background-size: 100%;
 }
 
 .n {
-  background: image-url('bn.png');
+  background: url('bn.png');
   background-size: 100%;
 }
 
 .b {
-  background: image-url('bb.png');
+  background: url('bb.png');
   background-size: 100%;
 }
 
 .q {
-  background: image-url('bq.png');
+  background: url('bq.png');
   background-size: 100%;
 }
 
 .k {
-  background: image-url('bk.png');
+  background: url('bk.png');
   background-size: 100%;
 }
 
 /* White pieces */
 .P {
-  background: image-url('wp.png');
+  background: url('wp.png');
   background-size: 100%;
 }
 
 .R {
-  background: image-url('wr.png');
+  background: url('wr.png');
   background-size: 100%;
 }
 
 .N {
-  background: image-url('wn.png');
+  background: url('wn.png');
   background-size: 100%;
 }
 
 .B {
-  background: image-url('wb.png');
+  background: url('wb.png');
   background-size: 100%;
 }
 
 .Q {
-  background: image-url('wq.png');
+  background: url('wq.png');
   background-size: 100%;
 }
 
